@@ -1,0 +1,52 @@
+Ville,Climat,Latitude,Longitude,Country,Iso2,Admin_name,Capital,Population,Population_proper
+Adelaide,Tempéré,-34.9289,138.6011,Australia,AU,South Australia,admin,1345777.0,1295714.0
+Albany,Tempéré,-35.0228,117.8814,Australia,AU,Western Australia,,34205.0,29373.0
+Albury,Tempéré,-36.0806,146.9158,Australia,AU,New South Wales,,47974.0,4804.0
+AliceSprings,Aride,-23.7,133.8667,Australia,AU,Northern Territory,,23726.0,23726.0
+BadgerysCreek,Tempéré,-37.7,145.5167,Australia,AU,Victoria,,1563.0,1563.0
+Ballarat,Tempéré,-37.55,143.85,Australia,AU,Victoria,,105471.0,98543.0
+Bendigo,Tempéré,-36.75,144.2667,Australia,AU,Victoria,,99122.0,95587.0
+Brisbane,Subtropical,-27.4678,153.0281,Australia,AU,Queensland,admin,2514184.0,2360241.0
+Cairns,Tropical,-16.9303,145.7703,Australia,AU,Queensland,,152729.0,146778.0
+Canberra,Tempéré,-35.2931,149.1269,Australia,AU,Australian Capital Territory,primary,426704.0,381488.0
+Cobar,Tempéré,-31.4997,145.8319,Australia,AU,New South Wales,,3990.0,3990.0
+CoffsHarbour,Tempéré,-30.3022,153.1189,Australia,AU,New South Wales,,71822.0,25752.0
+Dartmoor,Tempéré,50.5719,-3.9206,Australia,AU,Victoria,,,
+Darwin,Tropical,-12.4381,130.8411,Australia,AU,Northern Territory,admin,136828.0,136828.0
+GoldCoast,Subtropical,-28.0167,153.4,Australia,AU,Queensland,,679127.0,638090.0
+Hobart,Tempéré,-42.8806,147.325,Australia,AU,Tasmania,admin,240342.0,222356.0
+Katherine,Tropical,-14.4667,132.2667,Australia,AU,Northern Territory,,1488.0,1488.0
+Launceston,Tempéré,-41.4419,147.145,Australia,AU,Tasmania,,87328.0,87328.0
+Melbourne,Tempéré,-37.8136,144.9631,Australia,AU,Victoria,admin,5078193.0,4529500.0
+MelbourneAirport,Tempéré,-37.6697,144.8407,Australia,AU,Victoria,,,
+Mildura,Tropical,-34.1889,142.1583,Australia,AU,Victoria,,32738.0,32738.0
+Moree,Subtropical,-29.465,149.8344,Australia,AU,New South Wales,,9311.0,9311.0
+MountGambier,Tempéré,-37.8294,140.7828,Australia,AU,South Australia,,29639.0,25512.0
+MountGinini,Subtropical,-35.529591,148.77176,Australia,AU,Queensland,,,
+Newcastle,Tempéré,-32.9167,151.75,Australia,AU,New South Wales,,322278.0,152984.0
+Nhil,Tempéré,-36.3333,141.65,Australia,AU,Victoria,,1872.0,1872.0
+NorahHead,Tempéré,-33.2815,151.5548,Australia,AU,South Australia,,,
+NorfolkIsland,Subtropical,-29.03138,167.94748,Australia,AU,Norfolk Island,,2302.0,2302.0
+Nuriootpa,Tempéré,-34.4667,138.9833,Australia,AU,South Australia,,6314.0,6314.0
+PearceRAAF,Tempéré,-31.6673,116.0292,Australia,AU,Western Australia,,,
+Penrith,Tempéré,-33.7511,150.6942,Australia,AU,New South Wales,,13295.0,13295.0
+Perth,Tempéré,-31.9522,115.8589,Australia,AU,Western Australia,admin,2059484.0,2039200.0
+Perth,Tempéré,-41.5731,147.1714,Australia,AU,Tasmania,,2965.0,2965.0
+PerthAirport,Tempéré,-31.9374,115.9672,Australia,AU,Western Australia,,,
+Portland,Tempéré,-38.3333,141.6,Australia,AU,Victoria,,10900.0,9712.0
+Richmond,Tempéré,-33.5983,150.7511,Australia,AU,New South Wales,,5482.0,5482.0
+Richmond,Tempéré,-42.7336,147.4394,Australia,AU,Tasmania,,1464.0,1464.0
+Sale,Tempéré,-38.1,147.0667,Australia,AU,Victoria,,15135.0,13673.0
+SalmonGums,Tempéré,-32.7974,121.5514,Australia,AU,Western Australia,,,
+Sydney,Tempéré,-33.865,151.2094,Australia,AU,New South Wales,admin,5312163.0,4840600.0
+SydneyAirport,Tempéré,-33.9341,151.1728,Australia,AU,New South Wales,,,
+Townsville,Subtropical,-19.2564,146.8183,Australia,AU,Queensland,,180820.0,178649.0
+Tuggeranong,Tempéré,-35.41798,149.06878,Australia,AU,South Australia,,,
+Uluru,Désert,-25.3441,131.034,Australia,AU,Northern Territory,,,
+WaggaWagga,Tropical,-35.1189,147.3689,Australia,AU,New South Wales,,56442.0,54411.0
+Walpole,Tempéré,-34.9674,116.7558,Australia,AU,Western Australia,,,
+Watsonia,Tempéré,-37.7032,145.0893,Australia,AU,Victoria,,,
+Williamtown,Tempéré,-32.8117,151.8471,Australia,AU,South Australia,,,
+Witchcliffe,Tempéré,-34.0108,115.0974,Australia,AU,Western Australia,,,
+Wollongong,Tempéré,-34.4331,150.8831,Australia,AU,New South Wales,,302739.0,289236.0
+Woomera,Tempéré,-31.1446,136.8127,Australia,AU,South Australia,,,
