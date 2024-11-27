@@ -7,23 +7,33 @@ import seaborn as sns
 
 df_hist = pd.read_csv("weatherAUS.csv")
 df_villes = pd.read_csv("villes.csv")
-
+st.sidebar.image("favicon.png")
 st.title(":blue[Prévisions météo en Australie]")
 st.sidebar.title(":blue[Sommaire]")
 
 
-pages=["Introduction", "Description des données", "Préprocessing", "DataVizualization", "Modélisation", "Bibliographie"]
+
+pages=["Introduction", "Description du jeu de données", "Préprocessing", "DataVizualization", "Modélisation", "Bibliographie"]
 page=st.sidebar.radio("Aller vers", pages)
 
+
+st.sidebar.title(":blue[Intervenants]")
+st.sidebar.write(" - Christelle MENARD")
+st.sidebar.write(" - Fabrice SERGENT")
+st.sidebar.write(" - Rachid MAHDI")
+st.sidebar.write(" - Sergio VELASCO")
+
+st.sidebar.title(":blue[Tuteur :] Antoine FRADIN")
+
 if page == pages[0] : 
-    st.write("### Introduction")
+    st.header(":blue[Introduction]") 
     st.write ("Cet ensemble de données contient environ 10 ans d'observations météorologiques quotidiennes provenant de nombreux endroits en Australie.")
     st.write("Le premier objectif est de prédire la variable cible : RainTomorrow. Elle signifie : a-t-il plu le jour suivant, oui ou non ? Cette colonne est Oui si la pluie pour ce jour était de 1mm ou plus.")
     st.image('australie.jpg', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 
 if page == pages[1] : 
-    
+    st.header(":blue[Description du jeu de données]") 
     st.write("#### :blue[**Le dataframe**]")
 
     st.write("Le Dataframe principal est composé de l'historique des données météo en Australie sur 10 ans")
@@ -100,7 +110,7 @@ if page == pages[1] :
     
     
 if page == pages[2] :  # Préprocessing
-
+    st.header(":blue[Préprocessing]") 
     st.write("Le but de cet étape est de préparer le jeu de données pour l'étude. Cette étape passe par : ")
     st.write(" - une phase d'étude des données;")
     st.write(" - un enrichissement du dataframe à l'aide de données complémentaires;")
@@ -200,15 +210,13 @@ if page == pages[2] :  # Préprocessing
 
 
 if page == pages[3] : 
-    st.write("### DataVizualization")   
-   
-
-    st.write("Résumé de la table historique", )
+    st.header(":blue[DataVizualization]")   
+    st.write("Résumé de la table historique")
     st.dataframe(df_hist.describe())
     
 if page == pages[4] : 
-    st.write("### Modélisation")   
+    st.header(":blue[Modélisation]")   
     
     
 if page == pages[5] : 
-    st.write("### Bibliographie")   
+    st.header(":blue[Bibliographie]")   
