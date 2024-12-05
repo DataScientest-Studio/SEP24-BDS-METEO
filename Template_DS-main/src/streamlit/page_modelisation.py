@@ -10,24 +10,33 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, recall_score, f1_score, precision_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+
 import xgboost as xgb
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
 from keras.optimizers import Adam
 
-def page_modelisation():
-    st.title("Modélisation des Modèles Machine Learning et Deep Learning")
 
+from page_modelisation_multi import models_multi_days
+
+RANDOM_STATE = 2406
+
+
+def page_modelisation():
+    st.subheader("Modélisation des Modèles Machine Learning et Deep Learning")
+
+    architecture = st.selectbox(label="Choisissez type d'architecture globale", 
+                                options=['Jour', 'Multi jours'],
+                                index=0)
+    
+    if architecture == "Jour":
+        models_unique_day()
+    elif architecture == "Multi jours":
+        models_multi_days()
+
+def models_unique_day():
     # Désactiver les options spécifiques à OneDNN pour TensorFlow
     os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
-    # Chargement des données
-    @st.cache_data
-    def load_data():
-        dataset = pd.read_csv("data/dataset.csv", encoding="utf-8")
-        X = dataset.drop(columns=["RainTomorrow", "Unnamed: 0"], errors="ignore")
-        y = dataset["RainTomorrow"]
-        return train_test_split(X, y, test_size=0.2, random_state=42)
 
     X_train, X_test, y_train, y_test = load_data()
 
@@ -44,7 +53,7 @@ def page_modelisation():
     )
 
     # Organisation avec des colonnes
-    col1, col2 = st.columns([1, 3])
+    col1, col2 = st.columns([1, 2])
 
     with col1:
         st.subheader("Choix des Modèles et Paramètres")
@@ -70,12 +79,13 @@ def page_modelisation():
             dropout_rate = st.slider("Taux de Dropout", 0.1, 0.5, 0.2, 0.1)
             epochs = st.slider("Nombre d'époques", 10, 100, 30, 10)
             batch_size = st.slider("Taille de batch", 16, 128, 64, 16)
+    
+    if st.button("Lancer le modèle"):
+        with col2:
+            st.subheader("Résultats")
+            results = {}
 
-    with col2:
-        st.subheader("Résultats")
-        results = {}
 
-        if st.button("Lancer le modèle"):
             if model_choice == "Logistic Regression":
                 model = LogisticRegression(C=C, max_iter=max_iter, random_state=42)
             elif model_choice == "Random Forest":
@@ -117,3 +127,10 @@ def page_modelisation():
             # Affichage des résultats
             st.write(pd.DataFrame([results], index=["Metrics"]))
             st.bar_chart(results)
+
+@st.cache_data
+def load_data():
+    dataset = pd.read_csv("data/dataset.csv", encoding="utf-8")
+    X = dataset.drop(columns=["RainTomorrow", "Unnamed: 0"], errors="ignore")
+    y = dataset["RainTomorrow"]
+    return train_test_split(X, y, test_size=0.2, random_state=42)
