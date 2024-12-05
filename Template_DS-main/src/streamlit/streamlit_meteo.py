@@ -78,10 +78,6 @@ if page == pages[6]:
 if page == pages[7]:
     page_lim_avenir()
 
-# 8-Conclusions
-if page == pages[8]:
-    page_conclusions()  
-
-# 9-Bibliographie
-if page == pages[9] : 
+# 8-Bibliographie
+if page == pages[8] : 
     page_bibliography()   
