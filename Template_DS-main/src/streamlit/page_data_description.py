@@ -1,27 +1,34 @@
 import streamlit as st
 import plotly.express as px 
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 def page_data_description(df_hist, df_villes):
-    st.header(":blue[Description du jeu de données]") 
-    st.write("#### :blue[**Le dataframe**]")
-
-    st.write("Le Dataframe principal est composé de l'historique des données météo en Australie sur 10 ans")
-    st.dataframe(df_hist.head(20)  )
+    st.header(":blue[2- Description du jeu de données]") 
+    st.write("##### :green[**Le dataframe**]")
+    st.write("Le Dataframe principal est composé de l'**historique** des données **météo** en Australie sur **10 ans**.")
+    st.dataframe(df_hist.head(20))
     nlig, ncol = df_hist.shape
-    st.write(f"Le DataFrame est composé de {nlig} lignes et {ncol} colonnes.")
-    
-    
-
-    st.write("#### :blue[**Les données**]")
-    st.write("Les données composant le dataframe peuvent être classées selon les typologies suivantes :")
+       
+    st.write("##### :green[**Les données**]")
+    st.write(f"Il est **composé** de **{nlig}** lignes et **{ncol}** colonnes.")
+    st.write("Les données composant ce dataframe peuvent être classées selon les **typologies principales** suivantes :")
    
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["Date", "Location", "Température", 
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["Date", "Lieu", "Température", 
                                                         "Pression", "Précipitation", "Vent", "Données complémentaires"])
 
     with tab1: # Données Date 
-        st.write("**- Date :** date d'observation des données météo")
-          
-    
+        st.write("**- Date :** date d'observation des données météorologiques. Elles sont enregistrées depuis la mise en place de la station météo sur son lieu de pose. Il est à noter des dates de démarrage différentes en fonction des lieux. Certaines stations n'enregistrent pas l'ensemble des données.")
+        
+        fig = plt.figure()
+        df_min_max_date = df_hist.groupby('Location').agg({'Date': ['min', 'max']})
+        for i, location in enumerate(df_min_max_date.index):
+            plt.plot([df_min_max_date.loc[location, ('Date','min')], df_min_max_date.loc[location, ('Date','max')]], [i,i], '-o');plt.yticks(range(len(df_min_max_date.index)), df_min_max_date.index)
+        plt.yticks(fontsize=6);
+        plt.title("Périodes des enregistrements de stations météorologiques australiennes")
+        st.pyplot(fig)
+       
     with tab2:  # Location
         st.write("**- Location :** lieu d'observation des données météo")
         
@@ -36,7 +43,7 @@ def page_data_description(df_hist, df_villes):
         st.write("**- MinTemp  :** températures minimale observée sur la journée.")
         st.write("**- MaxTemp  :** températures maximale observée sur la journée.")
         
-        if st.checkbox("Afficher la description des colonnes températures") :
+        if st.checkbox("Afficher les données statistique des colonnes températures") :
             st.dataframe(df_hist[["Temp9am", "Temp3pm", "MinTemp","MaxTemp"]].describe() )  
 
    
@@ -44,7 +51,7 @@ def page_data_description(df_hist, df_villes):
         st.write("**- Pressure9am  :** pression athmosphèrique observées à 9h00.")
         st.write("**- Pressure3pm  :** pression athmosphèrique observées à 15h00.")
         
-        if st.checkbox("Afficher la description des colonnes pression athmosphèrique") :
+        if st.checkbox("Afficher les données statistique des colonnes pression athmosphèrique") :
             st.dataframe(df_hist[["Pressure9am", "Pressure3pm"]].describe() ) 
    
     with tab5:  # Pluie
@@ -55,7 +62,7 @@ def page_data_description(df_hist, df_villes):
         st.write("**- Humidity9am  :** taux d'humidité observé à 9h00.")
         st.write("**- Humidity3pm  :** taux d'humidité observé à 15h00.")
         
-        if st.checkbox("Afficher la description des colonnes humidité") :
+        if st.checkbox("Afficher les données statistique des colonnes humidité") :
             st.dataframe(df_hist[["Rainfall", "Evaporation", "Humidity9am", "Humidity3pm"]].describe() )     
             
             
@@ -89,4 +96,4 @@ def create_map(df_villes):
     fig.update_layout(mapbox_style='open-street-map')
     fig.update_layout(coloraxis_showscale=False)
     
-    return fig         
+    return fig 

@@ -1,5 +1,5 @@
 import streamlit as st
 
 def page_conclusions():
-    st.write("### Conclusions")
+    st.header(":blue[9- Conclusion]") 
     st.write("#### A COMPLETER")
