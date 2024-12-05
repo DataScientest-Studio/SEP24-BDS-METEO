@@ -10,7 +10,6 @@ from page_metrics import *
 from page_modelisation import *
 from page_model_test import *
 from page_lim_avenir import *
-from page_conclusions import *
 from page_bibliography import *
 
 #Data Loading
@@ -26,21 +25,20 @@ st.sidebar.image("images/favicon.png")
 st.title(":blue[Prévisions météo en Australie]")
 st.sidebar.title(":blue[Sommaire]")
 
-pages=["Introduction",              #0
-       "Description des données",   #1
-       "DataVizualization",         #2
-       "Preprocessing",             #3
-       "Métriques",                 #4
-       "Modélisation",              #5 
-       "Test du Modèle",            #6 
-       "Limitations et Avenir",     #7
-       "Conclusion",                #8
-       "Bibliographie"]             #9
+pages=["1- Introduction",              #0
+       "2- Description des données",   #1
+       "3- DataVizualization",         #2
+       "4- Preprocessing",             #3
+       "5- Métriques",                 #4
+       "6- Modélisation",              #5 
+       "7- Test du Modèle",            #6 
+       "8- Conclusion et prévisionnel",     #7
+       "Bibliographie"]             #8
 
 page=st.sidebar.radio("Aller vers", pages)
 
 st.sidebar.title(":blue[Intervenants]")
-st.sidebar.write(" - Christelle MENARD")
+st.sidebar.write(" - Chrystelle MENARD")
 st.sidebar.write(" - Fabrice SERGENT")
 st.sidebar.write(" - Rachid MAHDI")
 st.sidebar.write(" - Sergio VELASCO")
