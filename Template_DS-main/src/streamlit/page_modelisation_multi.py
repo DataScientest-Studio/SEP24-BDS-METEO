@@ -14,6 +14,10 @@ from keras.layers import LSTM, Dense, Dropout, Input, Flatten, Conv1D
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
+import os
+import gzip
+import shutil
+
 
 RANDOM_STATE = 2406
 
@@ -144,8 +148,19 @@ def models_multi_days():
 
 @st.cache_data
 def load_data_multi(sequence_length=5):
-    data = np.load(f"data/dataset_serie_{sequence_length}.npz")
-    return data["X"], data["Y"]
+    filename = f"data/dataset_serie_{sequence_length}.npz.gz"
+
+    with gzip.open(filename, "rb") as f_in:
+        filename_no_zip =  filename[:-3]
+        with open(filename_no_zip, "wb") as f_out:
+            shutil.copyfileobj(f_in, f_out)
+
+    with np.load(filename_no_zip) as data:
+        X_loaded = data["X"]
+        y_loaded = data["Y"]
+
+    os.remove(filename_no_zip)
+    return X_loaded, y_loaded
 
 def get_oversampling_serie(X, Y):
 
