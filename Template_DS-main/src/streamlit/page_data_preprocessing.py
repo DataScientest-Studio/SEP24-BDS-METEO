@@ -12,10 +12,6 @@ def page_data_preprocessing(df_hist, df_villes):
     st.write(" - un enrichissement du dataframe à l'aide de données complémentaires;")
     st.write(" - une complétion des NA par des valeurs caculées ou déduites à partir des données existantes.")
         
-    if st.checkbox("Afficher le nombre de NA par colonne") :
-        fig = px.bar(x = df_hist.columns,y= df_hist.isna().mean()*100)    
-        st.plotly_chart(fig)
-        
     st.write("")
     st.write("Une stratégie de traitement de ces valeurs manquantes doit être définie pour :")   
     st.write(" - Garder un maximum de données;")
@@ -96,8 +92,3 @@ def page_data_preprocessing(df_hist, df_villes):
         st.write("**- Cloud3pm :** Suppression de la colonne.")
         
 
-    st.write("#### :blue[**4.4. Résultat du pré-processing**]")   
-    if st.checkbox("Afficher le nombre de NA par colonne après pré-processing") :
-        df_result = pd.read_csv("data/dataset.csv")
-        fig = px.bar(x = df_result.columns,y= df_result.isna().mean()*100)    
-        st.plotly_chart(fig)
