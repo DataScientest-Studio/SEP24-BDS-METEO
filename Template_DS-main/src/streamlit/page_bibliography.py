@@ -1,4 +1,8 @@
+
+import streamlit as st
+
 def page_bibliography():
+
     st.header(":blue[Bibliographie]") 
     
     st.write("Les observations **quotidiennes** proviennent de nombreuses stations météorologiques et sont **disponibles** sur : ")
