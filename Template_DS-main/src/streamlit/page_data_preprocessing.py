@@ -98,6 +98,6 @@ def page_data_preprocessing(df_hist, df_villes):
 
     st.write("#### :blue[**4.4. Résultat du pré-processing**]")   
     if st.checkbox("Afficher le nombre de NA par colonne après pré-processing") :
-        df_result = pd.read_csv("./../../Data/dataset.csv")
+        df_result = pd.read_csv("data/dataset.csv")
         fig = px.bar(x = df_result.columns,y= df_result.isna().mean()*100)    
         st.plotly_chart(fig)
