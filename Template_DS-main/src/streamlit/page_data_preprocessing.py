@@ -5,6 +5,11 @@ import pandas as pd
 import plotly.graph_objects as go
 
 def graph_hisplot(df, list_col, list_label) :
+ ###########################################################################################
+ ##
+ ##     Tracé des histogrammes de distribution d'une liste de variables
+ ##
+ ###########################################################################################   
     i = 1
     
     fig = plt.figure(figsize = (20, 10))
@@ -22,6 +27,11 @@ def graph_hisplot(df, list_col, list_label) :
     return
 
 def graph_boxplot(df, list_col, list_label) :
+ ###########################################################################################
+ ##
+ ##     Tracé des boites à moustaches d'une liste de variables    
+ ##
+ ###########################################################################################   
     i = 1
     
     fig = plt.figure(figsize = (20, 10))
@@ -38,7 +48,11 @@ def graph_boxplot(df, list_col, list_label) :
     return        
 
 def get_lieblle_graph_temp(option):
-    
+ ###########################################################################################
+ ##
+ ##     Création en dynamique du libellé du graphe présentant la température et sa moyenne associée    
+ ##
+ ###########################################################################################   
     ch = "Températures prélevées à {} dans la station {} du {} au {}, climat associé est {}"
     
 
@@ -76,11 +90,17 @@ def get_lieblle_graph_temp(option):
     
     return libelle      
   
+ ###########################################################################################
+ ##
+ ##    PROGRAMME PRINCIPAL de la page PRE PROCESSING   
+ ##
+ ###########################################################################################   
+
 def page_data_preprocessing(df_hist, df_villes):    
     st.header(":blue[4. Préprocessing]") 
     st.write("#### :blue[**4.1. Généralités**]")
     st.write("Le but de cette étape est de préparer le jeu de données pour l'étude. Cette étape passe par : ")
-    st.write(" - une phase d'étude des données;")
+    st.write(" - une phase d'étude des données (recherche de doublons, de valeurs aberrantes);")
     st.write(" - un enrichissement du dataframe à l'aide de données complémentaires;")
     st.write(" - une recherche des valeurs aberrantes, pour soit les corriger, soit les supprimer si la correction n'est pas aisée.")  
     st.write(" - une complétion des NA par des valeurs caculées ou déduites à partir des données existantes.")
@@ -110,13 +130,15 @@ def page_data_preprocessing(df_hist, df_villes):
         st.write("La première étape a été d'enrichir les données du dataframe avec des données complémentaires déduites à partir de la localité.")
         
         st.write("A partir du nom des stations de météo, nous avons à l'aide de GoogleMaps et de Wikipédia, créé un datframe contenant les coordonnées GPS du lieu de relevé et le climat associé à la station.")
-        
+        st.image('images/wiki_maps.png', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto") 
         st.write("Les données ajoutées sont : ")
         st.write(" - Les coordonnées gégraphiques de la localité : Longitude et Latitude;")
         st.write(" - Le type de climat associé à la localité;")
         st.image('images/climat australie.jpg', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")  
     
         st.write(" - Discrétisation de la longitude (Ouest, Centre, Est) et de la latitude (Nord, Centre, Sud);")
+        st.image('images/decoupage_australie.png', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")  
+        
         
         # Affichage de la distribution de températures   
         if st.checkbox("Afficher le dataframe utilisé pour enrichir les données localisation") :
@@ -127,7 +149,7 @@ def page_data_preprocessing(df_hist, df_villes):
         list_col = ["Temp9am", "Temp3pm", "MinTemp", "MaxTemp"]
         list_label = ["Température à 9h", "Température à 3h", "Température minimale", "Température maximale"]
         st.write("Les températures relevées suivent une loi normale et les boites à moustaches ne font appaitre aucune valeur aberrante ou extreme. Il n'y a donc pas de relevé de température à corriger. ")
-        if st.checkbox("Afficher la distribution") :
+        if st.checkbox("Afficher la distribution des températures") :
             st.image('images/distri_temperature.png', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")   
             
         st.write("Comme la température est une donnée plutot stable, nous avons décidé de compléter les valeurs absentes sur les colonnes températures par la moyenne à +/- 3 jours sur le même climat.")
@@ -156,12 +178,16 @@ def page_data_preprocessing(df_hist, df_villes):
 
 
 
-
    
     with tab4:  # Pression
-        st.write("**- Pressure9am  :** Suppression des lignes présentant une NA pour cette valeur.")
-        st.write("**- Pressure3pm  :** Suppression des lignes présentant une NA pour cette valeur.")
+        st.write("Les pressions relevées suivent une loi normale et les boites à moustaches ne font appaitre aucune valeur aberrante ou extreme.")
         
+        if st.checkbox("Afficher la distribution de la pression") :
+            st.image('images/distri_pression.png', caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")   
+
+
+        st.write("La donnée Pression étant une donnée très volatile, nous n'avons pu définir une règle de remplissage des NA, nous avons donc décider de supprimer les NA pour cette donnée.")
+
    
     with tab5:  # Pluie
         st.write("**- Rainfall :** Si RainToday = 0 alors 0 , sinon remplacement par la moyenne du groupe climat créé pour +/- 3 jours")
