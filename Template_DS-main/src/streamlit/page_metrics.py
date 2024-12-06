@@ -1,15 +1,23 @@
 import streamlit as st
 
 def page_metrics():
-    st.write("### Métriques")
-    st.write("""Dans ce projet académique visant à prédire la pluie du jour suivant, le choix de l'indicateur de performance s'est porté sur le F1-score \
-             appliqué à la classe "RainTomorrow" (précipitations le lendemain). Ce choix s'explique par l'importance de concilier précision et rappel pour \
-             bien détecter les jours pluvieux, en particulier dans une perspective de sécurité. Privilégier la détection de la pluie permet de minimiser les \
-             risques associés à des événements imprévus, comme les accidents ou les perturbations, même si cela peut entraîner quelques fausses alertes.""")
-    st.write("""Étant donné qu'il s'agit d'un projet académique sans client réel, cette décision a été prise selon mes propres critères, en tenant compte des \
-             enjeux de sécurité et du cadre pédagogique du projet. Ce choix oriente le modèle vers une meilleure identification des jours de pluie tout en \
-             maintenant une qualité équilibrée dans les prédictions.""")
+    st.header(":blue[5 -Métriques]")
     
+    col1, col2 = st.columns([0.6,0.4])
+    with col1:
+        st.write("Nous sommes face à un problème de classification avec des données désequilibrés. Donc le choix du métrique va permettre de mieux évaluer les résultats des modèles.")
+        st.write("Dans une perspective de sécurité, nous allons privilégier la détection de la pluie, donc la classification de la classe 1 (***RainTomorrow=1***)")
+        st.write("La métrique **F1-Score** s'avère la plus pertinent pour mesurer la qualité de la classification.")
+        _, center, __, = st.columns([0.5,2,0.3])
+        with center:
+            st.markdown("$$\\text{F1-Score} = 2 \\cdot \\frac{\\text{Précision} \\cdot \\text{Rappel}}{\\text{Précision} + \\text{Rappel}}$$")
+        st.write("Ce choix s'explique par l'importance de concilier précision et rappel pour bien détecter les jours pluvieux.")
+
+    with col2:
+        st.image("images/class_RainTomorrow.png")
+
+    
+
     metrics = st.checkbox("Rappel définitions des métriques:")
     if metrics :
         #Précision
@@ -30,3 +38,4 @@ def page_metrics():
         st.write("""Le F1-score est la moyenne harmonique de la précision et du rappel, ce qui permet de trouver un équilibre entre ces deux métriques. Il est défini comme :""")
         st.markdown("$$\\text{F1-Score} = 2 \\cdot \\frac{\\text{Précision} \\cdot \\text{Rappel}}{\\text{Précision} + \\text{Rappel}}$$")
         st.write("""Le F1-score est particulièrement utile lorsque les classes sont déséquilibrées ou lorsque l'on souhaite équilibrer les fausses alertes et les cas manqués.""")
+
