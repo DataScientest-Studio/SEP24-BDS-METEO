@@ -36,7 +36,46 @@ def graph_boxplot(df, list_col, list_label) :
 
     st.pyplot(fig)
     return        
+
+def get_lieblle_graph_temp(option):
+    
+    ch = "Températures prélevées à {} dans la station {} du {} au {}, climat associé est {}"
+    
+
+    if option == "BadgerysCreek":
+        heure = "15h00"
+        datedeb = "01/01/2011"
+        datefin = "30/03/2011"
+        climat = "Tempéré"
+
+    elif option == 'Canberra':
+        heure = "9h00"
+        datedeb = "01/11/2011"
+        datefin = "31/01/2012"
+        climat = "Tempéré"    
         
+    elif option == 'MountGinini':
+        heure = "15h00"
+        datedeb = "01/01/2009"
+        datefin = "28/02/2009"
+        climat = "Subtropical"   
+         
+    elif option == 'Ballarat':
+        heure = "9h00"
+        datedeb = "01/05/2013"
+        datefin = "31/072013"
+        climat = "Tempéré"
+        
+    elif option == 'PearceRAAF':
+        heure = "15h00"
+        datedeb = "01/09/2014"
+        datefin = "30/11/2014"
+        climat = "Tempéré"    
+        
+    libelle = ch.format(heure, option, datedeb, datefin, climat)
+    
+    return libelle      
+  
 def page_data_preprocessing(df_hist, df_villes):    
     st.header(":blue[4. Préprocessing]") 
     st.write("#### :blue[**4.1. Généralités**]")
@@ -110,7 +149,7 @@ def page_data_preprocessing(df_hist, df_villes):
             name = "Température moyenne"))
 
         fig.update_layout(
-            title = option,
+            title = get_lieblle_graph_temp(option),
             xaxis_tickformat = '%d %B %Y')
         
         st.plotly_chart(fig)
