@@ -23,15 +23,20 @@ RANDOM_STATE = 2406
 
 
 def page_modelisation():
-    st.subheader("Modélisation des Modèles Machine Learning et Deep Learning")
+    st.header(":blue[6- Modélisation]")
+    st.write("### :green[Choix des approaches]")
+    st.write("""Deux options sont possibles, analyser uniquement aujourd'hui pour prédire le jour de demain ou analyser l'historique de plusieurs jours.\
+             Les deux approaches ont été étudiés""")
+
+    st.write("### :green[Modélisation des Modèles Machine Learning et Deep Learning]")
 
     architecture = st.selectbox(label="Choisissez type d'architecture globale", 
-                                options=['Jour', 'Multi jours'],
+                                options=['Jour', 'Séries Temporelles'],
                                 index=0)
     
     if architecture == "Jour":
         models_unique_day()
-    elif architecture == "Multi jours":
+    elif architecture == "Séries Temporelles":
         models_multi_days()
 
 def models_unique_day():
@@ -56,7 +61,7 @@ def models_unique_day():
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.subheader("Choix des Modèles et Paramètres")
+        st.write("#### :green[Choix des Modèles et Paramètres]")
         model_options = ["Logistic Regression", "Random Forest", "XGBoost", "LSTM"]
         model_choice = st.selectbox("Choisissez un modèle :", model_options)
 
@@ -80,53 +85,53 @@ def models_unique_day():
             epochs = st.slider("Nombre d'époques", 10, 100, 30, 10)
             batch_size = st.slider("Taille de batch", 16, 128, 64, 16)
     
-    if st.button("Lancer le modèle"):
-        with col2:
-            st.subheader("Résultats")
-            results = {}
+        if st.button("Lancer le modèle"):
+            with col2:
+                st.write("#### :green[Résultats]")
+                results = {}
 
 
-            if model_choice == "Logistic Regression":
-                model = LogisticRegression(C=C, max_iter=max_iter, random_state=42)
-            elif model_choice == "Random Forest":
-                model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=42)
-            elif model_choice == "XGBoost":
-                model = xgb.XGBClassifier(
-                    n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=42
-                )
-            else:  # LSTM
-                X_train_processed = preprocessor.fit_transform(X_train)
-                X_test_processed = preprocessor.transform(X_test)
-                timesteps, features = 1, X_train_processed.shape[1]
-                X_train_lstm = X_train_processed.reshape((X_train_processed.shape[0], timesteps, features))
-                X_test_lstm = X_test_processed.reshape((X_test_processed.shape[0], timesteps, features))
+                if model_choice == "Logistic Regression":
+                    model = LogisticRegression(C=C, max_iter=max_iter, random_state=42)
+                elif model_choice == "Random Forest":
+                    model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, random_state=42)
+                elif model_choice == "XGBoost":
+                    model = xgb.XGBClassifier(
+                        n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=42
+                    )
+                else:  # LSTM
+                    X_train_processed = preprocessor.fit_transform(X_train)
+                    X_test_processed = preprocessor.transform(X_test)
+                    timesteps, features = 1, X_train_processed.shape[1]
+                    X_train_lstm = X_train_processed.reshape((X_train_processed.shape[0], timesteps, features))
+                    X_test_lstm = X_test_processed.reshape((X_test_processed.shape[0], timesteps, features))
 
-                model = Sequential([
-                    LSTM(lstm_units, input_shape=(timesteps, features), return_sequences=True),
-                    Dropout(dropout_rate),
-                    LSTM(lstm_units, return_sequences=False),
-                    Dropout(dropout_rate),
-                    Dense(1, activation='sigmoid')
-                ])
-                model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
-                model.fit(X_train_lstm, y_train, epochs=epochs, batch_size=batch_size, validation_split=0.2, verbose=0)
-                results["Accuracy"] = model.evaluate(X_test_lstm, y_test, verbose=0)[1]
-                results["Recall (1)"] = recall_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
-                results["F1 Score"] = f1_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
-                results["Precision (1)"] = precision_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
+                    model = Sequential([
+                        LSTM(lstm_units, input_shape=(timesteps, features), return_sequences=True),
+                        Dropout(dropout_rate),
+                        LSTM(lstm_units, return_sequences=False),
+                        Dropout(dropout_rate),
+                        Dense(1, activation='sigmoid')
+                    ])
+                    model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+                    model.fit(X_train_lstm, y_train, epochs=epochs, batch_size=batch_size, validation_split=0.2, verbose=0)
+                    results["Accuracy"] = model.evaluate(X_test_lstm, y_test, verbose=0)[1]
+                    results["Recall (1)"] = recall_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
+                    results["F1 Score"] = f1_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
+                    results["Precision (1)"] = precision_score(y_test, (model.predict(X_test_lstm) > 0.5).astype(int))
 
-            if model_choice != "LSTM":
-                pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("model", model)])
-                pipeline.fit(X_train, y_train)
-                y_pred = pipeline.predict(X_test)
-                results["Accuracy"] = accuracy_score(y_test, y_pred)
-                results["Recall (1)"] = recall_score(y_test, y_pred)
-                results["F1 Score"] = f1_score(y_test, y_pred)
-                results["Precision (1)"] = precision_score(y_test, y_pred)
+                if model_choice != "LSTM":
+                    pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("model", model)])
+                    pipeline.fit(X_train, y_train)
+                    y_pred = pipeline.predict(X_test)
+                    results["Accuracy"] = accuracy_score(y_test, y_pred)
+                    results["Recall (1)"] = recall_score(y_test, y_pred)
+                    results["F1 Score"] = f1_score(y_test, y_pred)
+                    results["Precision (1)"] = precision_score(y_test, y_pred)
 
-            # Affichage des résultats
-            st.write(pd.DataFrame([results], index=["Metrics"]))
-            st.bar_chart(results)
+                # Affichage des résultats
+                st.write(pd.DataFrame([results], index=["Metrics"]))
+                st.bar_chart(results)
 
 @st.cache_data
 def load_data():
