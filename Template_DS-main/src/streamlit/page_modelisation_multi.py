@@ -30,7 +30,7 @@ def models_multi_days():
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.subheader("Choix des Modèles et Paramètres")
+        st.write("#### :green[Choix des Modèles et Paramètres]")
         X, y = load_data_multi(sequence_length)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE, shuffle=True)
         X_train, y_train = get_oversampling_serie(X_train, y_train)
@@ -118,9 +118,8 @@ def models_multi_days():
 
         if st.button("Lancer le modèle"):
             with col2:
-                st.subheader("Résultats")
+                st.write("#### :green[Résultats]")
 
-                #if st.button("Lancer le modèle"):
                 if model_choice in ["Logistic Regression","Random Forest", "XGBoost"]:
                     X_train = X_train.reshape((X_train.shape[0], -1))
                     X_test = X_test.reshape((X_test.shape[0], -1))
