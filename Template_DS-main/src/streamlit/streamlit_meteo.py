@@ -39,7 +39,7 @@ pages=["1- Introduction",                   #0
 page=st.sidebar.radio("Aller vers", pages)
 
 st.sidebar.title(":blue[Intervenants]")
-st.sidebar.write(" - Christelle MENARD")
+st.sidebar.write(" - Chrystelle MENARD")
 st.sidebar.write(" - Fabrice SERGENT")
 st.sidebar.write(" - Rachid MAHDI")
 st.sidebar.write(" - Sergio VELASCO")
