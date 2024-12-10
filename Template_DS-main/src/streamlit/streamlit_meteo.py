@@ -10,7 +10,7 @@ from page_metrics import *
 from page_modelisation import *
 from page_model_test import *
 from page_lim_avenir import *
-from page_conclusions import *
+
 from page_bibliography import *
 
 #Data Loading
