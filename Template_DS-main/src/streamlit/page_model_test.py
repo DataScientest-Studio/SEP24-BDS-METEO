@@ -59,7 +59,7 @@ def page_test_model():
 
 
 def unique_test():
-    st.write("#### :green[Meilleur modèle jour unique]")
+    st.write("#### :green[Meilleur modèle journée unique]")
     #model, preprocessor = joblib.load("model/model_unique.joblib")
     X_train, X_test, y_train, y_test = load_data_unique()
     model = joblib.load("models/model_uni.joblib")
@@ -76,7 +76,7 @@ def unique_test():
   
                             
 def multi_test():
-    st.write("#### :green[Meilleur modèle séries temporelles]")
+    st.write("#### :green[Meilleur modèle séries temporelles (5 jours)]")
     filename = "models/model_multi.joblib"
     if os.path.isfile(filename):
         model, preprocessor = joblib.load(filename)
@@ -94,10 +94,10 @@ def multi_test():
                    "F1 Score": 0.6804,
                    "Precision (1)": 0.6581}
 
-    st.write(pd.DataFrame([results], index=["RandomForest_5"]))
+    st.write(pd.DataFrame([results], index=["Random Forest SérieTemporelles 5 jours"]))
     #st.bar_chart(results)
 
-    return pd.DataFrame([results], index=["RandomForest_5"])
+    return pd.DataFrame([results], index=["RF Série Temp 5 jours"])
     
 def preprocessing_multi():
     X, y = load_data_multi(SEQUENCE_LENGTH)

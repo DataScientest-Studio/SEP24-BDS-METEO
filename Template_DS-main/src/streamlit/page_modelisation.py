@@ -31,10 +31,10 @@ def page_modelisation():
     st.write("### :green[Modélisation des Modèles Machine Learning et Deep Learning]")
 
     architecture = st.selectbox(label="Choisissez type d'architecture globale", 
-                                options=['Jour', 'Séries Temporelles'],
+                                options=['Journée unique', 'Séries Temporelles'],
                                 index=0)
     
-    if architecture == "Jour":
+    if architecture == "Journée unique":
         models_unique_day()
     elif architecture == "Séries Temporelles":
         models_multi_days()
